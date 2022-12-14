@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useCallback } from "react";
 import Modal from "../components/addModal";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { addToDo } from "../actions/actions";
 
 const Form = styled.form`
   display: flex;
@@ -14,6 +16,7 @@ const Form = styled.form`
   input {
     width: 300px;
     height: 60px;
+    font-size: 20px;
     border: 1px solid black;
     padding: 0;
   }
@@ -29,22 +32,24 @@ const Form = styled.form`
   }
 `;
 
-const ToDoInput = ({ onInsert, todos }) => {
+const ToDoInput = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [titleValue, setTitleValue] = useState("");
+  const todos = useSelector((state) => state);
+  const nextId = useRef(todos.length);
+  const dispatch = useDispatch();
 
-  const onChangeTitle = useCallback((e) => {
-    setTitleValue(e.target.value);
-  }, []);
+  const onChangeTitle = useCallback((e) => setTitleValue(e.target.value), []);
 
   const onSubmit = useCallback(
     (e) => {
-      onInsert(titleValue);
-
-      setTitleValue("");
+      console.log(titleValue);
       e.preventDefault();
+      nextId.current++;
+      dispatch(addToDo({ id: nextId.current, title: titleValue }));
+      setTitleValue("");
     },
-    [onInsert, titleValue]
+    [titleValue]
   );
 
   const openModalHandler = () => {
@@ -57,7 +62,7 @@ const ToDoInput = ({ onInsert, todos }) => {
   return (
     <>
       <Form onSubmit={onSubmit}>
-        <input type="text" value={titleValue} onChange={onChangeTitle}></input>
+        <input type="text" onChange={onChangeTitle} value={titleValue}></input>
         <button type="submit" onClick={openModalHandler}>
           등록
         </button>

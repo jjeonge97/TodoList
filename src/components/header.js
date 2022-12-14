@@ -10,12 +10,6 @@ const StyledHeader = styled.div`
   align-items: center;
   line-height: 90px;
   justify-content: flex-start;
-
-  /* h1 {
-    font-size: 32px;
-    padding: 0 0 0 15px;
-    text-decoration: none;
-  } */
 `;
 
 const StyledLink = styled(Link)`
@@ -29,7 +23,6 @@ const StyledLink = styled(Link)`
   }
 `;
 
-// title onClick 하면 Home 화면으로 이동
 const Header = () => {
   return (
     <StyledHeader>

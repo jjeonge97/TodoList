@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import ProfileImage from "./profile.jpeg";
-import Home from "./Home";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  background-color: white;
-  border: 1px solid black;
+  background-color: #fbe1e1;
   width: 390px;
   height: 844px;
   display: flex;
@@ -13,7 +11,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-around;
 
-  .title {
+  h1 {
     font-size: 40px;
   }
 
@@ -25,22 +23,21 @@ const Container = styled.div`
     background-size: cover;
   }
 
-  .greeting {
+  p {
     font-size: 20px;
   }
 `;
 
-// 터치하면 Home 화면으로 넘어갈 수 있도록
 const StartPage = () => {
   return (
     <Container>
-      <h1 className="title">My To Do List</h1>
+      <h1>My To Do List</h1>
 
       <Link to="/home">
         <div className="profile_img" />
       </Link>
 
-      <p className="greeting">Touch me if you want to start</p>
+      <p>Touch me if you want to start</p>
     </Container>
   );
 };

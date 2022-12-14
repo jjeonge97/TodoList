@@ -9,16 +9,11 @@ const Ul = styled.ul`
   padding: 0;
 `;
 
-const ToDoList = ({ todos, onRemove, onClickCheck }) => {
+const ToDoList = ({ todos }) => {
   return (
     <Ul className="TodoList">
       {todos.map((todo) => (
-        <ToDoListItem
-          todo={todo}
-          key={todo.id}
-          onRemove={onRemove}
-          onClickCheck={onClickCheck}
-        />
+        <ToDoListItem todo={todo} key={todo.id} />
       ))}
     </Ul>
   );
