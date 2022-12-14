@@ -14,7 +14,7 @@ export const addToDo = ({ id, title }) => {
   };
 };
 
-export const deleteToDo = (id) => {
+export const deleteToDo = ({ id }) => {
   console.log("id :", id);
 
   return {
