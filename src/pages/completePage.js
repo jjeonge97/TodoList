@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   background-color: white;
@@ -10,6 +11,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  ul {
+    padding: 0;
+  }
 `;
 
 const Contents = styled.div`
@@ -28,16 +33,38 @@ const Contents = styled.div`
   }
 `;
 
+const Li = styled.li`
+  width: 200px;
+  height: 60px;
+  margin: 0 auto;
+  padding: 0 10px 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #f5bdbd;
+  font-size: 20px;
+`;
+
 const CompletePage = () => {
+  const todos = useSelector((state) => state);
+  console.log(todos);
+
   return (
     <>
       <Container>
-        <Header></Header>
+        <Header />
         <Contents>
           <p>완료한 항목</p>
-          <div id="complete_list"></div>
+          <div id="complete_list">
+            <ul>
+              {todos.map((todo) =>
+                todo.checked === true ? <Li>{todo.title}</Li> : null
+              )}
+            </ul>
+          </div>
         </Contents>
-        <Footer></Footer>
+        <Footer />
       </Container>
     </>
   );
